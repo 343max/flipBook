@@ -1,0 +1,9 @@
+body {
+	background-color: black;
+}
+
+div#page {
+	width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+}
