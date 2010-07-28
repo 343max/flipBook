@@ -1,25 +1,24 @@
 div.flipBook {
 	width: 600px;
 	height: 600px;
+	cursor: pointer;
 }
 
-div#myFlipbook {
+body {
+	background-color: black;
+}
+
+div#page {
 	width: 600px;
-	height: 600px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
-div.img1, div.img2, div.img3 {
+body {
+	color: white;
+	font-family: "Helvetica Neue", Helvetica, Arial;
 }
 
-div.img1 {
-	background-image: url(../i/1362473050_367d2f7d72_b.jpg);
+a {
+	color: white;
 }
-
-div.img2 {
-	background-image: url(../i/2836016055_7735049da7_b.jpg);
-}
-
-div.img3 {
-	background-image: url(../i/4623916671_0a6a0269bf_b.jpg);
-}
-
