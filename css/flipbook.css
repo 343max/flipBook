@@ -4,7 +4,7 @@ div.flipBook {
 	-webkit-perspective: 1200;
 }
 
-div.flipBook div.lying, div.flipBook div.flipping {
+div.flipBook div.flipping {
 	height: 100%;
 	width: 50%;
 }
@@ -13,20 +13,8 @@ div.flipBook div.left {
 	background-position: 0 0;
 }
 
-div.flipBook div.left.lying {
-	position: absolute;
-	top: 0;
-	left: 0;
-}
-
 div.flipBook div.right {
 	background-position: -300px 0;
-}
-
-div.flipBook div.right.lying {
-	position: absolute;
-	top: 0;
-	left: 50%;
 }
 
 div.flipBook div.flipping div {
@@ -46,6 +34,10 @@ div.flipBook div.flipping {
 	-webkit-transition: -webkit-transform 0.6s;
 	-webkit-transform: rotateY(0deg);
 	-webkit-transform-origin: 0 0 0;
+
+	-webkit-animation-duration: 0.3s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-direction: normal;
 
 	z-index: 0;
 }
@@ -70,9 +62,26 @@ div#cssFlipBook:hover div.flipping {
 	-webkit-transform: rotateY(-180deg);
 }
 
-
-/*
-div.flipbook div.right:hover {
-	-webkit-transform: rotateY(-70deg);
+@-webkit-keyframes firstImage {
+	0% {
+		-webkit-transform: rotateY(-180deg);
+	}
+	50% {
+		-webkit-transform: rotateY(-150deg);
+	}
+	100% {
+		-webkit-transform: rotateY(-180deg);
+	}
 }
 
+@-webkit-keyframes lastImage {
+	0% {
+		-webkit-transform: rotateY(0deg);
+	}
+	50% {
+		-webkit-transform: rotateY(-30deg);
+	}
+	100% {
+		-webkit-transform: rotateY(0deg);
+	}
+}

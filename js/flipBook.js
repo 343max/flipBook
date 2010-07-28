@@ -1,3 +1,10 @@
+jQuery.fn.startAnimation = function(animationName) {
+	var o = this;
+	o.css('-webkit-animation-name', '');
+	window.setTimeout(function() {
+		o.css('-webkit-animation-name', animationName);
+	}, 0);
+};
 
 (function() {
 	var newMethods = {
@@ -12,7 +19,8 @@
 
 			var settings = target.flipBookVars.settings = jQuery.extend({
 				currentImage: 0,
-				effectDuration: 600
+				effectDuration: 600,
+				fastFlipPause: 80
 			}, options);
 
 			var addFlippingPage = function(leftImageUrl, rightImageUrl, onLeft) {
@@ -59,6 +67,7 @@
 
 			target.flipBookVars.nextImage = function() {
 				if(this.settings.currentImage == this.pages.length - 2) {
+					this.pages[this.pages.length - 1].startAnimation('lastImage');
 					return false;
 				}
 				
@@ -67,19 +76,37 @@
 				var t = this;
 				window.setTimeout(function() {
 					t.moveToForderground([t.pages[t.settings.currentImage + 1], t.pages[t.settings.currentImage]]);
-				}, this.settings.effectDuration);
+				}, this.settings.effectDuration / 2);
 
 				return true;
 			};
 
 			target.flipBookVars.prevImage = function() {
 				if(this.settings.currentImage == 0) {
+					this.pages[0].startAnimation('firstImage');
 					return false;
 				}
 				this.pages[this.settings.currentImage--].removeClass('onLeft');
 				this.moveToForderground([this.pages[this.settings.currentImage], this.pages[this.settings.currentImage + 1]]);
 				return true;
 			};
+
+			target.flipBookVars.flipTo = function(index) {
+				if(index == this.settings.currentImage) return false;
+
+				if(index > this.settings.currentImage) {
+					var again = this.nextImage();
+				} else {
+					var again = this.prevImage();
+				}
+
+				if(again) {
+					var t = this;
+					window.setTimeout(function() {
+						t.flipTo(index);
+					}, this.settings.fastFlipPause);
+				}
+			}
 
 			return target.flipBookVars;
 		}
